@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "preparewidget.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -17,6 +19,12 @@ public:
     
 private:
     Ui::MainWindow *ui;
+    QWidget* view;
+    PrepareWidget* prepareWidget;
+
+protected:
+    void setView(QWidget* view);
+    void showPrepareWidget();
 };
 
 #endif // MAINWINDOW_H

@@ -13,8 +13,21 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    preparewidget.cpp \
+    userswidget.cpp \
+    bonuseswidget.cpp \
+    userwidget.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    preparewidget.h \
+    userswidget.h \
+    bonuseswidget.h \
+    userwidget.h \
+    datatypes.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    preparewidget.ui \
+    userswidget.ui \
+    bonuseswidget.ui \
+    userwidget.ui
