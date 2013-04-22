@@ -1,6 +1,7 @@
 #include "userswidget.h"
 #include "ui_userswidget.h"
 #include "userwidget.h"
+#include <QLineEdit>
 #include <QDebug>
 UsersWidget::UsersWidget(QWidget *parent) :
     QWidget(parent),
@@ -26,5 +27,11 @@ const QList<User> UsersWidget::users() {
 
 UserWidget* UsersWidget::addUser(UserWidget *user) {
     ui->verticalLayout->insertWidget(ui->verticalLayout->indexOf(ui->verticalSpacer->widget()), user);
+    connect(user->findChild<QLineEdit*>(), SIGNAL(textChanged(QString)), SLOT(emptyUser()));
     return user;
+}
+
+void UsersWidget::emptyUser() {
+    if(findChildren<UserWidget*>().last() == sender()->parent())
+        addUser();
 }

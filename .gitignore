@@ -11,7 +11,6 @@
 *.so
 *.dll
 *.dylib
-QrveFever.pro.user
 
 # Qt-es
 

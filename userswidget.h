@@ -23,8 +23,8 @@ public:
     
 private:
     Ui::UsersWidget *ui;
-public slots:
-
+private slots:
+    void emptyUser();
 };
 
 #endif // USERSWIDGET_H
