@@ -12,3 +12,8 @@ PrepareWidget::~PrepareWidget()
 {
     delete ui;
 }
+
+void PrepareWidget::on_pushButton_clicked()
+{
+    emit play(OptionsData(ui->users->users()));
+}

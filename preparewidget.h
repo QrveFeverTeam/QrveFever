@@ -2,6 +2,7 @@
 #define PREPAREWIDGET_H
 
 #include <QWidget>
+#include "datatypes.h"
 
 namespace Ui {
 class PrepareWidget;
@@ -17,6 +18,10 @@ public:
     
 private:
     Ui::PrepareWidget *ui;
+signals:
+    void play(const OptionsData& options);
+private slots:
+    void on_pushButton_clicked();
 };
 
 #endif // PREPAREWIDGET_H

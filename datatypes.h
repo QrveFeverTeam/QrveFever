@@ -2,16 +2,23 @@
 #define DATATYPES_H
 
 #include <QString>
+#include <QList>
+#include <QColor>
 
-class User {
-public:
+struct UserData {
     QString name;
+    QColor color;
     int leftKey;
     int rightKey;
-    int score;
-    User() {}
-    User(const QString& name, int leftKey, int rightKey, int score) :
-        name(name), leftKey(leftKey), rightKey(rightKey), score(score) {}
+    UserData() {}
+    UserData(const QString& name, const QColor& color, int leftKey, int rightKey) :
+        name(name), color(color), leftKey(leftKey), rightKey(rightKey) {}
+};
+
+struct OptionsData {
+    QList<UserData> users;
+    OptionsData(const QList<UserData>& users) :
+        users(users) {}
 };
 
 #endif // DATATYPES_H

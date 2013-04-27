@@ -17,8 +17,8 @@ UsersWidget::~UsersWidget()
     delete ui;
 }
 
-const QList<User> UsersWidget::users() {
-    QList<User> users;
+const QList<UserData> UsersWidget::users() {
+    QList<UserData> users;
     foreach (UserWidget* el, findChildren<UserWidget*>()) {
         users.append(el->user());
     }
@@ -27,11 +27,12 @@ const QList<User> UsersWidget::users() {
 
 UserWidget* UsersWidget::addUser(UserWidget *user) {
     ui->verticalLayout->insertWidget(ui->verticalLayout->indexOf(ui->verticalSpacer->widget()), user);
-    connect(user->findChild<QLineEdit*>(), SIGNAL(textChanged(QString)), SLOT(emptyUser()));
+    connect(user, SIGNAL(changed(const UserData&)), SLOT(addEmptyUser()));
+    connect(user, SIGNAL(closed()), SLOT(addEmptyUser()));
     return user;
 }
 
-void UsersWidget::emptyUser() {
-    if(findChildren<UserWidget*>().last() == sender()->parent())
+void UsersWidget::addEmptyUser() {
+    if(findChildren<UserWidget*>().last() == sender())
         addUser();
 }

@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 #include "preparewidget.h"
 
+#include <QDebug>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
@@ -16,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete prepareWidget;
 }
 
 void MainWindow::setView(QWidget *view) {
@@ -32,5 +35,10 @@ void MainWindow::showPrepareWidget() {
     if(!prepareWidget) {
         prepareWidget = new PrepareWidget();
     }
+    connect(prepareWidget, SIGNAL(play(OptionsData)), SLOT(play(OptionsData)));
     setView(prepareWidget);
+}
+
+void MainWindow::play(const OptionsData& options) {
+    qDebug() << options.users.front().leftKey;
 }

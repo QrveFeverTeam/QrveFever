@@ -17,14 +17,14 @@ public:
     explicit UsersWidget(QWidget *parent = 0);
     ~UsersWidget();
 
-    const QList<User> users();
+    const QList<UserData> users();
 
     UserWidget* addUser(UserWidget *user = new UserWidget());
     
 private:
     Ui::UsersWidget *ui;
 private slots:
-    void emptyUser();
+    void addEmptyUser();
 };
 
 #endif // USERSWIDGET_H

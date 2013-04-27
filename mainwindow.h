@@ -25,6 +25,9 @@ private:
 protected:
     void setView(QWidget* view);
     void showPrepareWidget();
+
+private slots:
+    void play(const OptionsData& options);
 };
 
 #endif // MAINWINDOW_H
