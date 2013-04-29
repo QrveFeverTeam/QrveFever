@@ -3,11 +3,14 @@
 #include <QKeyEvent>
 #include <QDebug>
 
-UserWidget::UserWidget(QWidget *parent) :
+UserWidget::UserWidget(const UserData& user, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::UserWidget)
 {
     ui->setupUi(this);
+    setAutoFillBackground(true);
+
+    this->user(user);
 }
 
 UserWidget::~UserWidget()
@@ -27,7 +30,7 @@ void UserWidget::user(const UserData &user) {
 }
 
 void UserWidget::keyPressEvent(QKeyEvent *e) {
-    if(e->key() != Qt::Key_Escape) {
+    if((e->key() >= Qt::Key_Left && e->key() <= Qt::Key_Down) || (e->key() >= Qt::Key_A && e->key() <= Qt::Key_Z) || (e->key() >= Qt::Key_0 && e->key() <= Qt::Key_9)) {
         activeKey(e->key());
     }
     deactivateKeyButton();
@@ -73,32 +76,52 @@ int UserWidget::leftKey() const {
     return m_leftKey;
 }
 void UserWidget::leftKey(int key) {
-    emitChanged();
     m_leftKey = key;
+    displayKey(ui->toolButton, key);
+    emitChanged();
 }
 
 int UserWidget::rightKey() const {
     return m_rightKey;
 }
 void UserWidget::rightKey(int key) {
-    emitChanged();
     m_rightKey = key;
+    displayKey(ui->toolButton_2, key);
+    emitChanged();
+}
+
+void UserWidget::displayKey(QToolButton *button, int key) {
+    QString c = QChar(activeKey());
+    if(key == Qt::Key_Left)
+        c = "Left";
+    else if(key == Qt::Key_Right)
+        c = "Right";
+    else if(key == Qt::Key_Up)
+        c = "Up";
+    else if(key == Qt::Key_Down)
+        c = "Down";
+    button->setText(c);
 }
 
 const QColor UserWidget::color() const {
     return m_color;
 }
 void UserWidget::color(const QColor &color) {
-    emitChanged();
     m_color = color;
+
+    QPalette p = palette();
+    p.setColor(backgroundRole(), color);
+    setPalette(p);
+
+    emitChanged();
 }
 
 const QString UserWidget::name() const {
     return ui->lineEdit->text();
 }
 void UserWidget::name(const QString &name) {
-    emitChanged();
     ui->lineEdit->setText(name);
+    emitChanged();
 }
 
 UserWidget::KeyRole UserWidget::activeKeyRole() const {
@@ -111,6 +134,10 @@ void UserWidget::activeKeyRole(KeyRole role) {
 
 QToolButton* UserWidget::activeKeyButton() const {
     return (activeKeyRole() == left) ? ui->toolButton : ui->toolButton_2;
+}
+
+int UserWidget::activeKey() const {
+    return (activeKeyRole() == left) ? leftKey() : rightKey();
 }
 
 void UserWidget::activeKey(int key) {

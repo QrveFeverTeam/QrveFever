@@ -26,6 +26,11 @@ const QList<UserData> UsersWidget::users() {
 }
 
 UserWidget* UsersWidget::addUser(UserWidget *user) {
+    if(!user) {
+        UserData data;
+        data.color = genColor();
+        user = new UserWidget(data);
+    }
     ui->verticalLayout->insertWidget(ui->verticalLayout->indexOf(ui->verticalSpacer->widget()), user);
     connect(user, SIGNAL(changed(const UserData&)), SLOT(addEmptyUser()));
     connect(user, SIGNAL(closed()), SLOT(addEmptyUser()));
@@ -35,4 +40,8 @@ UserWidget* UsersWidget::addUser(UserWidget *user) {
 void UsersWidget::addEmptyUser() {
     if(findChildren<UserWidget*>().last() == sender())
         addUser();
+}
+
+QColor UsersWidget::genColor() const {
+    return QColor(rand() % 256, rand() % 256, rand() % 256);
 }

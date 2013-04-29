@@ -14,7 +14,7 @@ class UserWidget : public QWidget
     Q_OBJECT
     
 public:
-    explicit UserWidget(QWidget *parent = 0);
+    explicit UserWidget(const UserData &user = UserData(), QWidget *parent = 0);
     ~UserWidget();
 
     const UserData user() const;
@@ -34,6 +34,8 @@ protected:
     int rightKey() const;
     void rightKey(int key);
 
+    void displayKey(QToolButton* button, int key);
+
     const QColor color() const;
     void color(const QColor& color);
 
@@ -42,6 +44,7 @@ protected:
 
     QToolButton* activeKeyButton() const;
 
+    int activeKey() const;
     void activeKey(int key);
 
     KeyRole activeKeyRole() const;

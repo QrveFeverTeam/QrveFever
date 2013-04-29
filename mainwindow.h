@@ -19,11 +19,11 @@ public:
     
 private:
     Ui::MainWindow *ui;
-    QWidget* view;
-    PrepareWidget* prepareWidget;
+    QWidget* m_view;
+    PrepareWidget* m_prepareWidget;
 
 protected:
-    void setView(QWidget* view);
+    void setView(QWidget* m_view);
     void showPrepareWidget();
 
 private slots:

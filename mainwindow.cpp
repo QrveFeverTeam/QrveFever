@@ -7,8 +7,8 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    view(0),
-    prepareWidget(0)
+    m_view(0),
+    m_prepareWidget(0)
 {
     ui->setupUi(this);
 
@@ -18,25 +18,25 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete prepareWidget;
+    delete m_prepareWidget;
 }
 
 void MainWindow::setView(QWidget *view) {
-    if(this->view) {
-        this->view->hide();
+    if(this->m_view) {
+        this->m_view->hide();
     }
-    this->view = view;
+    this->m_view = view;
     view->setParent(this);
     ui->verticalLayout->addWidget(view);
     view->show();
 }
 
 void MainWindow::showPrepareWidget() {
-    if(!prepareWidget) {
-        prepareWidget = new PrepareWidget();
+    if(!m_prepareWidget) {
+        m_prepareWidget = new PrepareWidget();
     }
-    connect(prepareWidget, SIGNAL(play(OptionsData)), SLOT(play(OptionsData)));
-    setView(prepareWidget);
+    connect(m_prepareWidget, SIGNAL(play(OptionsData)), SLOT(play(OptionsData)));
+    setView(m_prepareWidget);
 }
 
 void MainWindow::play(const OptionsData& options) {

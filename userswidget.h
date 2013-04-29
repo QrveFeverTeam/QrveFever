@@ -19,10 +19,14 @@ public:
 
     const QList<UserData> users();
 
-    UserWidget* addUser(UserWidget *user = new UserWidget());
+    UserWidget* addUser(UserWidget *user = 0);
     
+protected:
+    QColor genColor() const;
+
 private:
     Ui::UsersWidget *ui;
+
 private slots:
     void addEmptyUser();
 };
