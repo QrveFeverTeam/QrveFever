@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 
-#include "preparewidget.h"
+#include "Widgets/preparewidget.h"
 
 namespace Ui {
 class MainWindow;
@@ -23,8 +23,8 @@ private:
     PrepareWidget* m_prepareWidget;
 
 protected:
-    void setView(QWidget* m_view);
-    void showPrepareWidget();
+    void showView(QWidget* m_view);
+    void showPrepareView();
 
 private slots:
     void play(const OptionsData& options);

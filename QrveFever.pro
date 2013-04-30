@@ -14,20 +14,20 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    preparewidget.cpp \
-    userswidget.cpp \
-    bonuseswidget.cpp \
-    userwidget.cpp
+    Widgets/preparewidget.cpp \
+    Widgets/userswidget.cpp \
+    Widgets/bonuseswidget.cpp \
+    Widgets/userwidget.cpp
 
 HEADERS  += mainwindow.h \
-    preparewidget.h \
-    userswidget.h \
-    bonuseswidget.h \
-    userwidget.h \
+    Widgets/preparewidget.h \
+    Widgets/userswidget.h \
+    Widgets/bonuseswidget.h \
+    Widgets/userwidget.h \
     datatypes.h
 
 FORMS    += mainwindow.ui \
-    preparewidget.ui \
-    userswidget.ui \
-    bonuseswidget.ui \
-    userwidget.ui
+    Widgets/preparewidget.ui \
+    Widgets/userswidget.ui \
+    Widgets/bonuseswidget.ui \
+    Widgets/userwidget.ui

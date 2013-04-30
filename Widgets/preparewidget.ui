@@ -46,7 +46,7 @@
   <customwidget>
    <class>UsersWidget</class>
    <extends>QWidget</extends>
-   <header>userswidget.h</header>
+   <header>Widgets/userswidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
