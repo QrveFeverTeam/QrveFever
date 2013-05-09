@@ -2,6 +2,7 @@
 #define USERSWIDGET_H
 
 #include <QWidget>
+#include <QList>
 #include "userwidget.h"
 #include "datatypes.h"
 
@@ -22,13 +23,19 @@ public:
     UserWidget* addUser(UserWidget *user = 0);
     
 protected:
-    QColor genColor() const;
+    static const QColor COLORS[MAX_USERS];
+    const QColor newColor();
+    QList<QColor>& availableColors();
+    int& usersCount();
 
 private:
     Ui::UsersWidget *ui;
+    QList<QColor> m_availableColors;
+    int m_users_count;
 
 private slots:
     void addEmptyUser();
+    void userRemoved();
 };
 
 #endif // USERSWIDGET_H

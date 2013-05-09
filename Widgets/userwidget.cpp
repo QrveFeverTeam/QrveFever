@@ -50,8 +50,8 @@ void UserWidget::on_toolButton_2_clicked()
 
 void UserWidget::on_toolButton_3_clicked()
 {
-    emit closed();
     deleteLater();
+    emit closed();
 }
 
 void UserWidget::activateKeyButton() {
