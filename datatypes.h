@@ -4,6 +4,7 @@
 #include <QString>
 #include <QList>
 #include <QColor>
+#include "settings.h"
 
 struct UserData {
     QString name;

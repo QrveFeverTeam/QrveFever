@@ -24,7 +24,9 @@ HEADERS  += mainwindow.h \
     Widgets/userswidget.h \
     Widgets/bonuseswidget.h \
     Widgets/userwidget.h \
-    datatypes.h
+    datatypes.h \
+    Libs/utils.h \
+    settings.h
 
 FORMS    += mainwindow.ui \
     Widgets/preparewidget.ui \
