@@ -86,6 +86,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>toolButton_3</sender>
+   <signal>clicked()</signal>
+   <receiver>UserWidget</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>396</x>
+     <y>22</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>208</x>
+     <y>22</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>emitChanged()</slot>

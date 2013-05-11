@@ -36,6 +36,11 @@ void UserWidget::keyPressEvent(QKeyEvent *e) {
     deactivateKeyButton();
 }
 
+void UserWidget::closeEvent(QCloseEvent *)
+{
+    emit closed();
+}
+
 void UserWidget::on_toolButton_clicked()
 {
     activeKeyRole(left);
@@ -46,12 +51,6 @@ void UserWidget::on_toolButton_2_clicked()
 {
     activeKeyRole(right);
     activateKeyButton();
-}
-
-void UserWidget::on_toolButton_3_clicked()
-{
-    deleteLater();
-    emit closed();
 }
 
 void UserWidget::activateKeyButton() {

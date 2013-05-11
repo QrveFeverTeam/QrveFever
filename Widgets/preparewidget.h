@@ -16,6 +16,9 @@ public:
     explicit PrepareWidget(QWidget *parent = 0);
     ~PrepareWidget();
     
+protected:
+    void addBonuses();
+
 private:
     Ui::PrepareWidget *ui;
 signals:

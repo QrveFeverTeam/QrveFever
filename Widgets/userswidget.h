@@ -18,17 +18,18 @@ public:
     explicit UsersWidget(QWidget *parent = 0);
     ~UsersWidget();
 
-    const QList<UserData> users();
+    const QList<UserData> users() const;
 
     UserWidget* addUser(UserWidget *user = 0);
     
 protected:
-    static const QColor COLORS[MAX_USERS];
     const QColor newColor();
     QList<QColor>& availableColors();
     int& usersCount();
 
 private:
+    static const QColor COLORS[MAX_USERS];
+
     Ui::UsersWidget *ui;
     QList<QColor> m_availableColors;
     int m_users_count;

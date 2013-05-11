@@ -20,13 +20,11 @@ public:
     const UserData user() const;
     void user(const UserData& user);
 
-protected:
-    enum KeyRole { left, right };
+    const QColor color() const;
+    void color(const QColor& color);
 
-    void keyPressEvent(QKeyEvent *e);
-
-    void activateKeyButton();
-    void deactivateKeyButton();
+    const QString name() const;
+    void name(const QString& name);
 
     int leftKey() const;
     void leftKey(int key);
@@ -34,13 +32,16 @@ protected:
     int rightKey() const;
     void rightKey(int key);
 
+protected:
+    enum KeyRole { left, right };
+
+    void keyPressEvent(QKeyEvent *e);
+    void closeEvent(QCloseEvent *);
+
+    void activateKeyButton();
+    void deactivateKeyButton();
+
     void displayKey(QToolButton* button, int key);
-
-    const QColor color() const;
-    void color(const QColor& color);
-
-    const QString name() const;
-    void name(const QString& name);
 
     QToolButton* activeKeyButton() const;
 
@@ -64,7 +65,6 @@ signals:
 private slots:
     void on_toolButton_clicked();
     void on_toolButton_2_clicked();
-    void on_toolButton_3_clicked();
     void emitChanged();
 };
 

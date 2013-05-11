@@ -24,7 +24,7 @@ UsersWidget::~UsersWidget()
     delete ui;
 }
 
-const QList<UserData> UsersWidget::users() {
+const QList<UserData> UsersWidget::users() const {
     QList<UserData> users;
     foreach (UserWidget* el, findChildren<UserWidget*>()) {
         users.append(el->user());

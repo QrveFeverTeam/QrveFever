@@ -16,11 +16,21 @@ struct UserData {
         name(name), color(color), leftKey(leftKey), rightKey(rightKey) {}
 };
 
+struct BonusData {
+    QString name;
+    int frequency;
+    BonusData() : name(""), frequency(0) {}
+    BonusData(const QString& name, int frequency) : name(name), frequency(frequency) {}
+};
+
 struct OptionsData {
     QList<UserData> users;
+    QList<BonusData> bonuses;
     OptionsData() {}
     OptionsData(const QList<UserData>& users) :
-        users(users) {}
+        users(users){}
+    OptionsData(const QList<UserData>& users, const QList<BonusData>& bonuses) :
+        users(users), bonuses(bonuses) {}
 };
 
 #endif // DATATYPES_H
