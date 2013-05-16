@@ -42,7 +42,6 @@ void BonusWidget::frequency(int frequency) {
     ui->horizontalSlider->setValue(frequency);
 }
 
-
 void BonusWidget::on_toolButton_clicked()
 {
     ui->horizontalSlider->setValue(0);

@@ -15,6 +15,7 @@ UserWidget::UserWidget(const UserData& user, QWidget *parent) :
 
 UserWidget::~UserWidget()
 {
+    emit closed();
     delete ui;
 }
 

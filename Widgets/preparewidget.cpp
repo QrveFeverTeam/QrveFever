@@ -25,5 +25,5 @@ void PrepareWidget::addBonuses()
 
 void PrepareWidget::on_pushButton_clicked()
 {
-    emit play(OptionsData(ui->users->users()));
+    emit play(OptionsData(ui->users->users(), ui->bonuses->bonuses()));
 }

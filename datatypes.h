@@ -27,8 +27,6 @@ struct OptionsData {
     QList<UserData> users;
     QList<BonusData> bonuses;
     OptionsData() {}
-    OptionsData(const QList<UserData>& users) :
-        users(users){}
     OptionsData(const QList<UserData>& users, const QList<BonusData>& bonuses) :
         users(users), bonuses(bonuses) {}
 };

@@ -39,5 +39,5 @@ void MainWindow::showPrepareView() {
 }
 
 void MainWindow::play(const OptionsData& options) {
-    qDebug() << options.users.front().leftKey;
+
 }

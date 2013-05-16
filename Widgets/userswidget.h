@@ -35,7 +35,7 @@ private:
     int m_users_count;
 
 private slots:
-    void addEmptyUser();
+    void userChanged();
     void userRemoved();
 };
 

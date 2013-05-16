@@ -90,7 +90,7 @@
    <sender>toolButton_3</sender>
    <signal>clicked()</signal>
    <receiver>UserWidget</receiver>
-   <slot>close()</slot>
+   <slot>deleteLater()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>396</x>
