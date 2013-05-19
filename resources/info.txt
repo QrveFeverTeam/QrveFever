@@ -1,0 +1,12 @@
+b_speed		- OK
+b_invert	- OK
+b_slow		- OK
+b_thick		- OK
+
+n_clear		- OK
+n_more_bonuses	- OK
+
+g_thin		- OK
+g_slow		- OK
+g_invisible	- OK
+g_speed		- OK
