@@ -1,7 +1,7 @@
 #include "userwidget.h"
 #include "ui_userwidget.h"
 #include <QKeyEvent>
-#include <QDebug>
+#include "utils.h"
 
 UserWidget::UserWidget(const UserData& user, QWidget *parent) :
     QWidget(parent),
@@ -109,9 +109,7 @@ const QColor UserWidget::color() const {
 void UserWidget::color(const QColor &color) {
     m_color = color;
 
-    QPalette p = palette();
-    p.setColor(backgroundRole(), color);
-    setPalette(p);
+    setBackground(this, color);
 
     emitChanged();
 }

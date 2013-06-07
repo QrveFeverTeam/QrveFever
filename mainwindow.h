@@ -2,8 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
 #include "Widgets/preparewidget.h"
+#include "Widgets/gamewidget.h"
 
 namespace Ui {
 class MainWindow;
@@ -25,6 +25,7 @@ private:
 protected:
     void showView(QWidget* m_view);
     void showPrepareView();
+    void showGameView(const QList<UserData>& users);
 
 private slots:
     void play(const QList<UserData>& users);

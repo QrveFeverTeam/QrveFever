@@ -38,6 +38,11 @@ void MainWindow::showPrepareView() {
     showView(m_prepareWidget);
 }
 
-void MainWindow::play(const QList<UserData> &users) {
+void MainWindow::showGameView(const QList<UserData> &users)
+{
+    showView(new GameWidget(users));
+}
 
+void MainWindow::play(const QList<UserData> &users) {
+    showGameView(users);
 }

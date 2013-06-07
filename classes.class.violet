@@ -217,7 +217,7 @@
      <void property="text">
       <string>- signalMapper : QSignalMapper
 +/- active : bool
-+/- board : PlayBoard
++/- scene : QGraphicsScene
 +/- players : Player[]
 +/- points : QMap&lt;QString, int&gt;</string>
      </void>
@@ -225,10 +225,12 @@
     <void property="methods">
      <void property="text">
       <string>- (slot) playerCollision(player : Player) : void
-- newRound() : void
+- clear() : void
++ (signal) keyDown(event : QKeyEvent) : void
++ (signal) keyUp(event : QKeyEvent) : void
 + (signal) updatePoints(player : QString, points : int) : void
 + (signal) playerDead(player : QString) : void
-+ (signal) roundFinished() : void
++ (signal) newRound() : void
 + (signal) finished() : void
 + play()
 + stop()</string>
@@ -245,7 +247,7 @@
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double6"/>
-      <double>396.3121571004233</double>
+      <double>-3.687842899576708</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
@@ -256,7 +258,7 @@
      </void>
     </void>
     <void method="setLocation">
-     <double>396.3121571004233</double>
+     <double>-3.687842899576708</double>
      <double>-4.57998679699574</double>
     </void>
    </object>
@@ -268,7 +270,7 @@
       <string>- timer : PlayTimer
 +/- active : bool
 +/- userData : UserData
-+/- board : PlayBoard
++/- scene : QGraphicsScene
 +/- direction : float
 +/- position : QPointF
 +/- pen : QPen</string>
@@ -296,7 +298,7 @@
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double7"/>
-      <double>822.7917430643595</double>
+      <double>422.7917430643595</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
@@ -307,7 +309,7 @@
      </void>
     </void>
     <void method="setLocation">
-     <double>822.7917430643595</double>
+     <double>422.7917430643595</double>
      <double>150.3792652872969</double>
     </void>
    </object>
@@ -341,7 +343,7 @@
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double8"/>
-      <double>1158.8599941433636</double>
+      <double>758.8599941433636</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
@@ -352,45 +354,8 @@
      </void>
     </void>
     <void method="setLocation">
-     <double>1158.8599941433636</double>
+     <double>758.8599941433636</double>
      <double>202.60554726666214</double>
-    </void>
-   </object>
-  </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.ClassNode" id="ClassNode3">
-    <void property="methods">
-     <void property="text">
-      <string># keyPressEvent(event : QKeyEvent) : void
-# keyReleaseEvent(event : QKeyEvent) : void
-+ (signal) keyDown(event : QKeyEvent) : void
-+ (signal) keyUp(event : QKeyEvent) : void</string>
-     </void>
-    </void>
-    <void property="name">
-     <void property="text">
-      <string>PlayBoard : public QGraphicsView</string>
-     </void>
-    </void>
-   </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double9">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double9"/>
-      <double>53.100512662949484</double>
-     </void>
-    </void>
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>y</string>
-     <void method="set">
-      <object idref="Point2D$Double9"/>
-      <double>215.0112753367115</double>
-     </void>
-    </void>
-    <void method="setLocation">
-     <double>53.100512662949484</double>
-     <double>215.0112753367115</double>
     </void>
    </object>
   </void>
@@ -409,18 +374,6 @@
   <void method="connect">
    <object class="com.horstmann.violet.ClassRelationshipEdge">
     <void property="bentStyle">
-     <object class="com.horstmann.violet.BentStyle" field="HVH"/>
-    </void>
-    <void property="startArrowHead">
-     <object class="com.horstmann.violet.ArrowHead" field="DIAMOND"/>
-    </void>
-   </object>
-   <object idref="ClassNode1"/>
-   <object idref="ClassNode3"/>
-  </void>
-  <void method="connect">
-   <object class="com.horstmann.violet.ClassRelationshipEdge">
-    <void property="bentStyle">
      <object class="com.horstmann.violet.BentStyle" field="HV"/>
     </void>
     <void property="startArrowHead">
@@ -429,18 +382,6 @@
    </object>
    <object idref="ClassNode0"/>
    <object idref="ClassNode1"/>
-  </void>
-  <void method="connect">
-   <object class="com.horstmann.violet.ClassRelationshipEdge">
-    <void property="bentStyle">
-     <object class="com.horstmann.violet.BentStyle" field="HV"/>
-    </void>
-    <void property="startArrowHead">
-     <object class="com.horstmann.violet.ArrowHead" field="DIAMOND"/>
-    </void>
-   </object>
-   <object idref="ClassNode0"/>
-   <object idref="ClassNode3"/>
   </void>
  </object>
 </java>

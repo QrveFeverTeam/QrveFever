@@ -15,5 +15,7 @@ PrepareWidget::~PrepareWidget()
 
 void PrepareWidget::on_pushButton_clicked()
 {
-    emit play(ui->users->users());
+    QList<UserData> users = ui->users->users();
+    if(users.size())
+        emit play(ui->users->users());
 }
