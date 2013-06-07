@@ -13,8 +13,8 @@ ResultWidget::ResultWidget(const QString &name, const QColor &color, QWidget *pa
     this->color(color);
     points(0);
 
-    setBackground(ui->widget, Qt::white);
-    setBackground(ui->widget_2, Qt::white);
+    setBackground(ui->label, Qt::white);
+    setBackground(ui->label_2, Qt::white);
 }
 
 ResultWidget::~ResultWidget()
