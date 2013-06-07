@@ -27,7 +27,7 @@ protected:
     void showPrepareView();
 
 private slots:
-    void play(const OptionsData& options);
+    void play(const QList<UserData>& users);
 };
 
 #endif // MAINWINDOW_H

@@ -34,10 +34,10 @@ void MainWindow::showPrepareView() {
     if(!m_prepareWidget) {
         m_prepareWidget = new PrepareWidget();
     }
-    connect(m_prepareWidget, SIGNAL(play(OptionsData)), SLOT(play(OptionsData)));
+    connect(m_prepareWidget, SIGNAL(play(QList<UserData>)), SLOT(play(QList<UserData>)));
     showView(m_prepareWidget);
 }
 
-void MainWindow::play(const OptionsData& options) {
+void MainWindow::play(const QList<UserData> &users) {
 
 }

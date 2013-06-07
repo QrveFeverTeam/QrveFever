@@ -16,23 +16,17 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     Widgets/preparewidget.cpp \
     Widgets/userswidget.cpp \
-    Widgets/bonuseswidget.cpp \
-    Widgets/userwidget.cpp \
-    Widgets/bonuswidget.cpp
+    Widgets/userwidget.cpp
 
 HEADERS  += mainwindow.h \
     Widgets/preparewidget.h \
     Widgets/userswidget.h \
-    Widgets/bonuseswidget.h \
     Widgets/userwidget.h \
     datatypes.h \
     Libs/utils.h \
-    settings.h \
-    Widgets/bonuswidget.h
+    settings.h
 
 FORMS    += mainwindow.ui \
     Widgets/preparewidget.ui \
     Widgets/userswidget.ui \
-    Widgets/bonuseswidget.ui \
-    Widgets/userwidget.ui \
-    Widgets/bonuswidget.ui
+    Widgets/userwidget.ui

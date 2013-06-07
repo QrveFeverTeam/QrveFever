@@ -15,14 +15,11 @@ class PrepareWidget : public QWidget
 public:
     explicit PrepareWidget(QWidget *parent = 0);
     ~PrepareWidget();
-    
-protected:
-    void addBonuses();
 
 private:
     Ui::PrepareWidget *ui;
 signals:
-    void play(const OptionsData& options);
+    void play(const QList<UserData>& users);
 private slots:
     void on_pushButton_clicked();
 };
