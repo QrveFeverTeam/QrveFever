@@ -7,7 +7,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     m_view(0),
-    m_prepareWidget(0)
+    m_prepareWidget(0),
+    m_gameWidget(0)
 {
     ui->setupUi(this);
 
@@ -40,9 +41,18 @@ void MainWindow::showPrepareView() {
 
 void MainWindow::showGameView(const QList<UserData> &users)
 {
-    showView(new GameWidget(users));
+    if(m_gameWidget)
+        delete m_gameWidget;
+    GameWidget* m_gameWidget = new GameWidget(users);
+    connect(m_gameWidget, SIGNAL(exit()), SLOT(gameExit()));
+    showView(m_gameWidget);
 }
 
 void MainWindow::play(const QList<UserData> &users) {
     showGameView(users);
+}
+
+void MainWindow::gameExit()
+{
+    showPrepareView();
 }

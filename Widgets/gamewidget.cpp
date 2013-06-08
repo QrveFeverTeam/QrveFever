@@ -7,6 +7,8 @@ GameWidget::GameWidget(const QList<UserData> &users, QWidget *parent) :
 {
     ui->setupUi(this);
 
+    connect(ui->pushButton_2, SIGNAL(clicked()), SIGNAL(exit()));
+
     ui->results->setUsers(users);
 }
 

@@ -18,6 +18,9 @@ public:
     
 private:
     Ui::GameWidget *ui;
+
+signals:
+    void exit();
 };
 
 #endif // GAMEWIDGET_H

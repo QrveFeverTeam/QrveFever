@@ -21,6 +21,7 @@ private:
     Ui::MainWindow *ui;
     QWidget* m_view;
     PrepareWidget* m_prepareWidget;
+    GameWidget* m_gameWidget;
 
 protected:
     void showView(QWidget* m_view);
@@ -29,6 +30,7 @@ protected:
 
 private slots:
     void play(const QList<UserData>& users);
+    void gameExit();
 };
 
 #endif // MAINWINDOW_H
