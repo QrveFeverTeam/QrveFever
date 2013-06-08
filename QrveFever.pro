@@ -20,7 +20,8 @@ SOURCES += main.cpp\
     Widgets/gamewidget.cpp \
     Widgets/resultswidget.cpp \
     Widgets/resultwidget.cpp \
-    utils.cpp
+    utils.cpp \
+    Widgets/boardwidget.cpp
 
 HEADERS  += mainwindow.h \
     Widgets/preparewidget.h \
@@ -31,7 +32,8 @@ HEADERS  += mainwindow.h \
     Widgets/gamewidget.h \
     Widgets/resultswidget.h \
     Widgets/resultwidget.h \
-    utils.h
+    utils.h \
+    Widgets/boardwidget.h
 
 FORMS    += mainwindow.ui \
     Widgets/preparewidget.ui \
@@ -39,4 +41,5 @@ FORMS    += mainwindow.ui \
     Widgets/userwidget.ui \
     Widgets/gamewidget.ui \
     Widgets/resultswidget.ui \
-    Widgets/resultwidget.ui
+    Widgets/resultwidget.ui \
+    Widgets/boardwidget.ui

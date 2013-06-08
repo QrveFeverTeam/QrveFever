@@ -10,6 +10,13 @@ namespace Ui {
 class ResultsWidget;
 }
 
+class ResultWidgetGreater {
+public:
+    bool operator()(ResultWidget* l, ResultWidget* r) {
+        return l->points() > r->points();
+    }
+};
+
 class ResultsWidget : public QWidget
 {
     Q_OBJECT
@@ -27,6 +34,7 @@ public:
     
 protected:
     ResultWidget* addResult(const UserData& user);
+    void arrangeResults();
 
 private:
     Ui::ResultsWidget *ui;

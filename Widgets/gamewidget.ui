@@ -15,7 +15,17 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
-    <widget class="ResultsWidget" name="results" native="true"/>
+    <widget class="ResultsWidget" name="results" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>200</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="BoardWidget" name="board"/>
    </item>
   </layout>
  </widget>
@@ -25,6 +35,11 @@
    <extends>QWidget</extends>
    <header>Widgets/resultswidget.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>BoardWidget</class>
+   <extends>QGraphicsView</extends>
+   <header>Widgets/boardwidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

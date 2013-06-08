@@ -2,6 +2,7 @@
 #define RESULTWIDGET_H
 
 #include <QWidget>
+#include <QDebug>
 
 namespace Ui {
 class ResultWidget;
