@@ -1,15 +1,17 @@
 #include "player.h"
 #include <QKeyEvent>
 #include <QDebug>
-
+#include <qmath.h>
 #include <QGraphicsTextItem>
 
-Player::Player(const UserData& user, int interval, QGraphicsScene *scene, float width, float direction, QPointF position, QObject *parent) :
+Player::Player(const UserData& user, int interval, QGraphicsScene *scene, float width, float step, float direction, QPointF position, QObject *parent) :
     QObject(parent),
     m_user(user),
     m_interval(interval),
     m_active(false),
     m_scene(scene),
+    m_step(step),
+    m_radius(step * 300 / interval),
     m_direction(direction),
     m_lastDirection(direction),
     m_position(position),
@@ -35,6 +37,11 @@ const UserData Player::user() const
 QGraphicsScene *Player::scene() const
 {
     return m_scene;
+}
+
+float Player::step() const
+{
+    return m_step;
 }
 
 float Player::direction() const
@@ -81,10 +88,33 @@ void Player::paint()
 {
     QPainterPath path;
     path.moveTo(position());
-    QPointF newPos(position().x() + 10, position().y() + 10);
-    path.lineTo(newPos);
+
+    int a = m_lastDirection;
+    if(direction() == 0) {
+        float h = qCos(a * M_PI / 180.0) * step();
+        float y = position().y() - h;
+
+        float l = qTan(a * M_PI / 180.0) * h;
+        float x = position().x() - l;
+        path.lineTo(x, y);
+    }
+    else {
+        float r = m_radius;
+        float b = 90 - a;
+        float h  = r * qCos(b * M_PI / 180.0);
+        float l = h * qTan(b * M_PI / 180.0);
+
+        float length = (direction() > 0) ? direction() : -direction();
+        float x = position().x() - l - r;
+        float y = position().y() + h - r;
+
+        path.arcMoveTo(x, y, 2 * r, 2 * r, a);
+        path.arcTo(x, y, 2 * r, 2 * r, a, length);
+        m_lastDirection += direction();
+    }
     scene()->addPath(path, pen());
-    position(newPos);
+    position(path.currentPosition());
+
 }
 
 bool Player::collides()
@@ -95,9 +125,21 @@ bool Player::collides()
 
 void Player::keyDown(QKeyEvent *event)
 {
-
+    float length = step() / m_radius * 180 / M_PI;
+    if(event->key() == user().leftKey) {
+        if(m_direction < 0)
+            m_direction = 0;
+        m_direction += length;
+    }
+    else if(event->key() == user().rightKey) {
+        if(m_direction > 0)
+            m_direction = 0;
+        m_direction -= length;
+    }
 }
 
 void Player::keyUp(QKeyEvent *event)
 {
+    if((event->key() == user().leftKey && direction() > 0) || (event->key() == user().rightKey && direction() < 0))
+        direction(0);
 }

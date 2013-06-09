@@ -7,7 +7,7 @@ Game::Game(const QList<UserData> &users, int interval, QGraphicsScene *scene, QO
     m_scene(scene)
 {
     foreach(UserData user, users) {
-        Player* player = new Player(user, interval, scene, LINE_WIDTH);
+        Player* player = new Player(user, interval, scene, PLAYER_WIDTH, PLAYER_STEP);
         connect(this, SIGNAL(keyDown(QKeyEvent*)), player, SLOT(keyDown(QKeyEvent*)));
         connect(this, SIGNAL(keyUp(QKeyEvent*)), player, SLOT(keyUp(QKeyEvent*)));
         connect(player, SIGNAL(collision()), SLOT(playerCollision()));

@@ -8,6 +8,8 @@ GameWidget::GameWidget(const QList<UserData> &users, QWidget *parent) :
 {
     ui->setupUi(this);
 
+    ui->board->setFocus();
+
     ui->results->setUsers(users);
 
     QGraphicsScene* scene = new QGraphicsScene(ui->board->sceneRect());
@@ -17,7 +19,6 @@ GameWidget::GameWidget(const QList<UserData> &users, QWidget *parent) :
     connect(ui->board, SIGNAL(keyDown(QKeyEvent*)), game(), SIGNAL(keyDown(QKeyEvent*)));
     connect(ui->board, SIGNAL(keyUp(QKeyEvent*)), game(), SIGNAL(keyUp(QKeyEvent*)));
     game()->play();
-
 }
 
 GameWidget::~GameWidget()
@@ -39,6 +40,7 @@ void GameWidget::on_pushButton_clicked()
         ui->pushButton->setText(tr("Play"));
     }
     else {
+        ui->board->setFocus();
         game()->play();
         ui->pushButton->setText(tr("Pause"));
     }
