@@ -7,9 +7,10 @@ Game::Game(const QList<UserData> &users, int interval, QGraphicsScene *scene, QO
     m_scene(scene)
 {
     foreach(UserData user, users) {
-        Player* player = new Player(user, interval, scene);
+        Player* player = new Player(user, interval, scene, LINE_WIDTH);
         connect(this, SIGNAL(keyDown(QKeyEvent*)), player, SLOT(keyDown(QKeyEvent*)));
         connect(this, SIGNAL(keyUp(QKeyEvent*)), player, SLOT(keyUp(QKeyEvent*)));
+        connect(player, SIGNAL(collision()), SLOT(playerCollision()));
         m_players.append(player);
     }
 }
@@ -55,6 +56,8 @@ void Game::stop()
 }
 
 
-void Game::playerCollision(Player *player)
+void Game::playerCollision()
 {
+    Player *player = qobject_cast<Player*>(sender());
+    qDebug() << player->user().name;
 }

@@ -60,8 +60,16 @@
    <extends>QWidget</extends>
    <header>Widgets/userswidget.h</header>
    <container>1</container>
+   <slots>
+    <signal>playEnabled()</signal>
+    <signal>playDisabled()</signal>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources/>
  <connections/>
+ <slots>
+  <slot>enablePlay()</slot>
+  <slot>disablePlay()</slot>
+ </slots>
 </ui>

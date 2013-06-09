@@ -22,6 +22,8 @@ signals:
     void play(const QList<UserData>& users);
 private slots:
     void on_pushButton_clicked();
+    void enablePlay();
+    void disablePlay();
 };
 
 #endif // PREPAREWIDGET_H

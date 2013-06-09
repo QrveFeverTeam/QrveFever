@@ -1,5 +1,6 @@
 #include "gamewidget.h"
 #include "ui_gamewidget.h"
+#include <QGraphicsScene>
 
 GameWidget::GameWidget(const QList<UserData> &users, QWidget *parent) :
     QWidget(parent),
@@ -9,7 +10,10 @@ GameWidget::GameWidget(const QList<UserData> &users, QWidget *parent) :
 
     ui->results->setUsers(users);
 
-    m_game = new Game(users, GAME_INTERVAL, ui->board->scene());
+    QGraphicsScene* scene = new QGraphicsScene(ui->board->sceneRect());
+    ui->board->setScene(scene);
+
+    m_game = new Game(users, GAME_INTERVAL, scene);
     connect(ui->board, SIGNAL(keyDown(QKeyEvent*)), game(), SIGNAL(keyDown(QKeyEvent*)));
     connect(ui->board, SIGNAL(keyUp(QKeyEvent*)), game(), SIGNAL(keyUp(QKeyEvent*)));
     game()->play();
@@ -30,8 +34,12 @@ Game *GameWidget::game() const
 
 void GameWidget::on_pushButton_clicked()
 {
-    if(game()->active())
+    if(game()->active()) {
         game()->stop();
-    else
+        ui->pushButton->setText(tr("Play"));
+    }
+    else {
         game()->play();
+        ui->pushButton->setText(tr("Pause"));
+    }
 }

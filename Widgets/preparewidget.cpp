@@ -19,3 +19,13 @@ void PrepareWidget::on_pushButton_clicked()
     if(users.size())
         emit play(ui->users->users());
 }
+
+void PrepareWidget::enablePlay()
+{
+    ui->pushButton->show();
+}
+
+void PrepareWidget::disablePlay()
+{
+    ui->pushButton->hide();
+}

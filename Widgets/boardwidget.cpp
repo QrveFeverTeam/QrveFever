@@ -8,6 +8,7 @@ BoardWidget::BoardWidget(QWidget *parent) :
     ui(new Ui::BoardWidget)
 {
     ui->setupUi(this);
+    setRenderHints(QPainter::Antialiasing | QPainter::HighQualityAntialiasing);
 }
 
 BoardWidget::~BoardWidget()

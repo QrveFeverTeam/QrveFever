@@ -2,7 +2,6 @@
 #define GAME_H
 
 #include <QObject>
-#include <QSignalMapper>
 #include "player.h"
 #include <QList>
 #include <QMap>
@@ -27,10 +26,9 @@ protected:
     void reset();
 
 protected slots:
-    void playerCollision(Player* player);
+    void playerCollision();
 
 private:
-    QSignalMapper m_mapper;
     int m_interval;
     bool m_active;
     QGraphicsScene* m_scene;
