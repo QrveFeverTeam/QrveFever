@@ -36,7 +36,6 @@ protected:
     enum KeyRole { left, right };
 
     void keyPressEvent(QKeyEvent *e);
-    void closeEvent(QCloseEvent *);
 
     void activateKeyButton();
     void deactivateKeyButton();

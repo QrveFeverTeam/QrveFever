@@ -35,16 +35,16 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="pushButton_2">
          <property name="text">
-          <string>Pause</string>
+          <string>Exit</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="pushButton">
          <property name="text">
-          <string>Exit</string>
+          <string>Pause</string>
          </property>
         </widget>
        </item>
@@ -53,7 +53,14 @@
     </layout>
    </item>
    <item>
-    <widget class="BoardWidget" name="board"/>
+    <widget class="BoardWidget" name="board">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
@@ -71,7 +78,24 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>GameWidget</receiver>
+   <slot>deleteLater()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>65</x>
+     <y>347</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>569</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
  <slots>
   <signal>exit()</signal>
  </slots>

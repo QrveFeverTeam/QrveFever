@@ -34,15 +34,13 @@ void MainWindow::showView(QWidget *view) {
 void MainWindow::showPrepareView() {
     if(!m_prepareWidget) {
         m_prepareWidget = new PrepareWidget();
+        connect(m_prepareWidget, SIGNAL(play(QList<UserData>)), SLOT(play(QList<UserData>)));
     }
-    connect(m_prepareWidget, SIGNAL(play(QList<UserData>)), SLOT(play(QList<UserData>)));
     showView(m_prepareWidget);
 }
 
 void MainWindow::showGameView(const QList<UserData> &users)
 {
-    if(m_gameWidget)
-        delete m_gameWidget;
     GameWidget* m_gameWidget = new GameWidget(users);
     connect(m_gameWidget, SIGNAL(exit()), SLOT(gameExit()));
     showView(m_gameWidget);
