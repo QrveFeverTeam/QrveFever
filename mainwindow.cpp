@@ -11,10 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
     m_gameWidget(0)
 {
     ui->setupUi(this);
-
-    showPrepareView();
-
     layout()->setSizeConstraint(QLayout::SetFixedSize);
+    showPrepareView();
 }
 
 MainWindow::~MainWindow()
