@@ -3,6 +3,8 @@
 #include <QDebug>
 #include <qmath.h>
 #include <QGraphicsTextItem>
+#include <QTimerEvent>
+#include <QTime>
 
 Player::Player(const UserData& user, int interval, QGraphicsScene *scene, float width, float step, float direction, QPointF position, QObject *parent) :
     QObject(parent),
@@ -15,8 +17,10 @@ Player::Player(const UserData& user, int interval, QGraphicsScene *scene, float 
     m_direction(direction),
     m_lastDirection(direction),
     m_position(position),
+    m_hole(-1),
     m_pen(user.color, width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
+    qsrand(QTime::currentTime().msec());
 }
 
 int Player::interval() const
@@ -79,8 +83,19 @@ void Player::stop()
     killTimer(m_timer);
 }
 
-void Player::timerEvent(QTimerEvent *)
+void Player::timerEvent(QTimerEvent *e)
 {
+    if(m_hole > -1) {
+        m_hole++;
+        if(m_hole >= qCeil(pen().width() * 2 / step())) {
+            m_hole = -1;
+            m_pen.setColor(user().color);
+        }
+    }
+    else if(qrand() % 36 == qrand() % 36) {
+        m_hole = 0;
+        m_pen.setColor(scene()->backgroundBrush().color());
+    }
     paint();
 }
 

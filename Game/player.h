@@ -26,7 +26,7 @@ public:
     void stop();
 
 protected:
-    void timerEvent(QTimerEvent *);
+    void timerEvent(QTimerEvent *e);
     void paint();
     bool collides();
 
@@ -41,6 +41,7 @@ private:
     float m_direction;
     float m_lastDirection;
     QPointF m_position;
+    int m_hole;
     QPen m_pen;
 
 signals:

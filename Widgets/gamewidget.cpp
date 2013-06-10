@@ -13,6 +13,7 @@ GameWidget::GameWidget(const QList<UserData> &users, QWidget *parent) :
     ui->results->setUsers(users);
 
     QGraphicsScene* scene = new QGraphicsScene(ui->board->sceneRect());
+    scene->setBackgroundBrush(ui->board->backgroundBrush());
     ui->board->setScene(scene);
 
     m_game = new Game(users, GAME_INTERVAL, scene);
