@@ -16,6 +16,7 @@ public:
     int interval() const;
     bool active() const;
     QGraphicsScene* scene() const;
+    const QList<UserData> users() const;
     const QMap<QString, int> results() const;
 
 public slots:
@@ -23,7 +24,9 @@ public slots:
     void stop();
 
 protected:
-    void reset();
+    void initRound();
+    void clearPlayers();
+    void timerEvent(QTimerEvent *);
 
 protected slots:
     void playerCollision();
@@ -32,8 +35,10 @@ private:
     int m_interval;
     bool m_active;
     QGraphicsScene* m_scene;
+    QList<UserData> m_users;
     QList<Player*> m_players;
     QMap<QString, int> m_results;
+    int m_timer;
 
 signals:
     void keyDown(QKeyEvent* event);

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QGraphicsScene>
+#include <QGraphicsPathItem>
 #include "datatypes.h"
 
 class Player : public QObject
@@ -26,9 +27,8 @@ public:
     void stop();
 
 protected:
-    void timerEvent(QTimerEvent *e);
+    void timerEvent(QTimerEvent *);
     void paint();
-    bool collides();
 
 private:
     int m_timer;

@@ -19,6 +19,7 @@ GameWidget::GameWidget(const QList<UserData> &users, QWidget *parent) :
     m_game = new Game(users, GAME_INTERVAL, scene);
     connect(ui->board, SIGNAL(keyDown(QKeyEvent*)), game(), SIGNAL(keyDown(QKeyEvent*)));
     connect(ui->board, SIGNAL(keyUp(QKeyEvent*)), game(), SIGNAL(keyUp(QKeyEvent*)));
+    connect(m_game, SIGNAL(updateResult(QString,int)), ui->results, SLOT(result(QString,int)));
     game()->play();
 }
 

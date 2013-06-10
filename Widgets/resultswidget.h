@@ -29,6 +29,7 @@ public:
 
     const QMap<QString, int> results() const;
 
+public slots:
     int result(const QString& name) const;
     void result(const QString& name, int points);
     
