@@ -53,6 +53,7 @@ int Game::toReach() const
 
 void Game::play()
 {
+    m_timer.start();
     m_active = true;
     foreach(Player* player, m_players)
         player->play();
@@ -61,6 +62,7 @@ void Game::play()
 void Game::stop()
 {
     m_active = false;
+    m_timer.stop();
     foreach(Player* player, m_players)
         player->stop();
 }
