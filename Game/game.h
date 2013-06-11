@@ -51,7 +51,7 @@ signals:
     void playerDead(const QString& name);
     void newRound();
     void updateToReach(int toReach);
-    void finished();
+    void finished(const QString& winner);
 };
 
 #endif // GAME_H

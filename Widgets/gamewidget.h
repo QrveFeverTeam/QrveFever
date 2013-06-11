@@ -28,6 +28,7 @@ signals:
 private slots:
     void on_pushButton_clicked();
     void toReachChanged(int toReach);
+    void finished(const QString& winner);
 };
 
 #endif // GAMEWIDGET_H

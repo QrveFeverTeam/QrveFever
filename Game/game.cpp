@@ -123,7 +123,7 @@ void Game::roundEnd()
     qSort(values.begin(), values.end(), qGreater<int>());
     if(values[0] >= toReach()) {
         if(values.size() < 2 || values[0] - values[1] > 1) {
-            emit finished();
+            emit finished(m_results.key(values[0]));
             clearPlayers();
             return;
         }

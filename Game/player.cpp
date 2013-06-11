@@ -107,7 +107,7 @@ void Player::timerEvent(QTimerEvent *)
             visible(true);
         }
     }
-    else if(visible() && rand() % 100 == 0) {
+    else if(visible() && rand() % 64 == 0) {
         m_holeN = 1;
         visible(false);
     }
