@@ -24,6 +24,8 @@ Player::Player(const UserData& user, int interval, QGraphicsScene *scene, float 
     qsrand(QTime::currentTime().msec());
 
     m_head = scene->addEllipse(0, 0, width, width, Qt::NoPen, user.color);
+
+    m_outlineRect.addRect(width / 2.0, width / 2.0, scene->width() - width, scene->height() - width);
 }
 
 int Player::interval() const
@@ -152,13 +154,22 @@ void Player::paint()
     moveHead();
 
     QGraphicsPathItem* item = scene()->addPath(path, pen());
+
     if(collides(item))
         emit collision();
 }
 
-bool Player::collides(QGraphicsItem *item)
+bool Player::collides(QGraphicsPathItem *item)
 {
-    return item->collidingItems().size() > (int)(pen().width() / step()) + 2;
+    if(!visible())
+        return false;
+
+    if(!m_outlineRect.contains(item->path()))
+        return true;
+
+    QList<QGraphicsItem*> items = item->collidingItems();
+    items.removeAll(m_head);
+    return items.size() > qCeil(pen().width() / step()) + 1;
 }
 
 void Player::moveHead()

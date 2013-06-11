@@ -31,7 +31,7 @@ public:
 protected:
     void timerEvent(QTimerEvent *);
     void paint();
-    bool collides(QGraphicsItem* item);
+    bool collides(QGraphicsPathItem *item);
     void moveHead();
 
 private:
@@ -42,6 +42,7 @@ private:
     bool m_visible;
     int m_holeN;
     QGraphicsScene* m_scene;
+    QPainterPath m_outlineRect;
     float m_step;
     float m_radius;
     float m_direction;

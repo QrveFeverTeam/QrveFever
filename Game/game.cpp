@@ -12,6 +12,7 @@ Game::Game(const QList<UserData> &users, int interval, QGraphicsScene *scene, QO
     qsrand(QTime::currentTime().msec());
     foreach(UserData user, users)
         m_results[user.name] = 0;
+
     initRound();
 }
 
