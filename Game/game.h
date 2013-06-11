@@ -5,6 +5,7 @@
 #include "player.h"
 #include <QList>
 #include <QMap>
+#include <QTimer>
 
 class Game : public QObject
 {
@@ -18,6 +19,7 @@ public:
     QGraphicsScene* scene() const;
     const QList<UserData> users() const;
     const QMap<QString, int> results() const;
+    int toReach() const;
 
 public slots:
     void play();
@@ -26,10 +28,11 @@ public slots:
 protected:
     void initRound();
     void clearPlayers();
-    void timerEvent(QTimerEvent *);
 
 protected slots:
     void playerCollision();
+    void roundEnd();
+    void showPlayers();
 
 private:
     int m_interval;
@@ -38,7 +41,8 @@ private:
     QList<UserData> m_users;
     QList<Player*> m_players;
     QMap<QString, int> m_results;
-    int m_timer;
+    int m_toReach;
+    QTimer m_timer;
 
 signals:
     void keyDown(QKeyEvent* event);
@@ -46,6 +50,7 @@ signals:
     void updateResult(const QString& name, int points);
     void playerDead(const QString& name);
     void newRound();
+    void updateToReach(int toReach);
     void finished();
 };
 

@@ -11,16 +11,19 @@ Player::Player(const UserData& user, int interval, QGraphicsScene *scene, float 
     m_user(user),
     m_interval(interval),
     m_active(false),
+    m_visible(true),
+    m_holeN(0),
     m_scene(scene),
     m_step(step),
     m_radius(step * 400 / interval),
     m_direction(0),
     m_lastDirection(direction),
     m_position(position),
-    m_hole(-1),
     m_pen(user.color, width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin)
 {
     qsrand(QTime::currentTime().msec());
+
+    m_head = scene->addEllipse(0, 0, width, width, Qt::NoPen, user.color);
 }
 
 int Player::interval() const
@@ -31,6 +34,16 @@ int Player::interval() const
 bool Player::active() const
 {
     return m_active;
+}
+
+bool Player::visible() const
+{
+    return m_visible;
+}
+
+void Player::visible(bool visible)
+{
+    m_visible = visible;
 }
 
 const UserData Player::user() const
@@ -85,23 +98,23 @@ void Player::stop()
 
 void Player::timerEvent(QTimerEvent *)
 {
-  /*  if(m_hole) {
-        m_hole++;
-        if(m_hole > qCeil(pen().width() * 2.5 / step())) {
-            m_hole = 0;
-            m_pen.setColor(user().color);
+    if(m_holeN) {
+        m_holeN++;
+        if(m_holeN > M_PI * pen().width() / step()) {
+            m_holeN = 0;
+            visible(true);
         }
     }
-    else if(qrand() % 32 == qrand() % 64) {
-        m_hole = 1;
-        m_pen.setColor(scene()->backgroundBrush().color());
-    }*/
+    else if(visible() && rand() % 100 == 0) {
+        m_holeN = 1;
+        visible(false);
+    }
     paint();
 }
 
 void Player::paint()
 {
-    QPainterPath path;// = m_item->path();
+    QPainterPath path;
     path.moveTo(position());
 
     int a = m_lastDirection;
@@ -111,7 +124,10 @@ void Player::paint()
 
         float l = qTan(a * M_PI / 180.0) * h;
         float x = position().x() - l;
-        path.lineTo(x, y);
+        if(visible())
+            path.lineTo(x, y);
+        else
+            path.moveTo(x, y);
     }
     else {
         float r = m_radius;
@@ -123,14 +139,31 @@ void Player::paint()
         float x = position().x() - l - r;
         float y = position().y() + h - r;
 
-        path.arcMoveTo(x, y, 2 * r, 2 * r, a);
-        path.arcTo(x, y, 2 * r, 2 * r, a, length);
+        if(visible()) {
+            path.arcMoveTo(x, y, 2 * r, 2 * r, a);
+            path.arcTo(x, y, 2 * r, 2 * r, a, length);
+        }
+        else
+            path.arcMoveTo(x, y, 2 * r, 2 * r, a + length);
         m_lastDirection += direction();
     }
     position(path.currentPosition());
+
+    moveHead();
+
     QGraphicsPathItem* item = scene()->addPath(path, pen());
-    if(item->collidingItems().size() > 2)
+    if(collides(item))
         emit collision();
+}
+
+bool Player::collides(QGraphicsItem *item)
+{
+    return item->collidingItems().size() > (int)(pen().width() / step()) + 2;
+}
+
+void Player::moveHead()
+{
+    m_head->setPos(position().x() - (m_head->rect().width() / 2.0), position().y() - (m_head->rect().height() / 2.0));
 }
 
 void Player::keyDown(QKeyEvent *event)

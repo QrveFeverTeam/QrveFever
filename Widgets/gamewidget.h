@@ -27,6 +27,7 @@ signals:
     void exit();
 private slots:
     void on_pushButton_clicked();
+    void toReachChanged(int toReach);
 };
 
 #endif // GAMEWIDGET_H

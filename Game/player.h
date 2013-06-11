@@ -15,6 +15,8 @@ public:
     const UserData user() const;
     int interval() const;
     bool active() const;
+    bool visible() const;
+    void visible(bool visible);
     QGraphicsScene* scene() const;
     float step() const;
     float direction() const;
@@ -29,20 +31,24 @@ public:
 protected:
     void timerEvent(QTimerEvent *);
     void paint();
+    bool collides(QGraphicsItem* item);
+    void moveHead();
 
 private:
     int m_timer;
     UserData m_user;
     int m_interval;
     bool m_active;
+    bool m_visible;
+    int m_holeN;
     QGraphicsScene* m_scene;
     float m_step;
     float m_radius;
     float m_direction;
     float m_lastDirection;
     QPointF m_position;
-    int m_hole;
     QPen m_pen;
+    QGraphicsEllipseItem* m_head;
 
 signals:
     void collision();

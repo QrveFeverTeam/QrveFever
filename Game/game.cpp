@@ -7,11 +7,11 @@ Game::Game(const QList<UserData> &users, int interval, QGraphicsScene *scene, QO
     m_interval(interval),
     m_scene(scene),
     m_users(users),
-    m_timer(-1)
+    m_toReach(users.size() * 10 - 10)
 {
     qsrand(QTime::currentTime().msec());
     foreach(UserData user, users)
-        m_results[user.name] = 10;
+        m_results[user.name] = 0;
     initRound();
 }
 
@@ -45,6 +45,11 @@ const QMap<QString, int> Game::results() const
     return m_results;
 }
 
+int Game::toReach() const
+{
+    return m_toReach;
+}
+
 void Game::play()
 {
     m_active = true;
@@ -70,8 +75,13 @@ void Game::initRound()
         connect(this, SIGNAL(keyDown(QKeyEvent*)), player, SLOT(keyDown(QKeyEvent*)));
         connect(this, SIGNAL(keyUp(QKeyEvent*)), player, SLOT(keyUp(QKeyEvent*)));
         connect(player, SIGNAL(collision()), SLOT(playerCollision()));
+        player->visible(false);
         m_players.append(player);
     }
+    emit newRound();
+    connect(&m_timer, SIGNAL(timeout()), SLOT(showPlayers()));
+    m_timer.setSingleShot(true);
+    m_timer.start(2000);
 }
 
 void Game::clearPlayers()
@@ -80,15 +90,6 @@ void Game::clearPlayers()
         player->deleteLater();
     m_players.clear();
 }
-
-void Game::timerEvent(QTimerEvent *)
-{
-    if(m_timer > -1)
-        killTimer(m_timer);
-    initRound();
-    play();
-}
-
 
 void Game::playerCollision()
 {
@@ -105,8 +106,39 @@ void Game::playerCollision()
         emit updateResult(name, ++m_results[name]);
     }
 
-    if(m_players.size() <= 1) {
-        stop();
-        m_timer = startTimer(1000);
+    if(m_players.size() == 1) {
+        connect(&m_timer, SIGNAL(timeout()), SLOT(roundEnd()));
+        m_timer.setSingleShot(true);
+        m_timer.start(2000);
     }
+}
+
+void Game::roundEnd()
+{
+    m_timer.disconnect(this, SLOT(roundEnd()));
+
+    stop();
+    QList<int> values = m_results.values();
+    qSort(values.begin(), values.end(), qGreater<int>());
+    if(values[0] >= toReach()) {
+        if(values.size() < 2 || values[0] - values[1] > 1) {
+            emit finished();
+            clearPlayers();
+            return;
+        }
+        else {
+            m_toReach = values[1] + 2;
+            emit updateToReach(toReach());
+        }
+    }
+    initRound();
+    play();
+}
+
+void Game::showPlayers()
+{
+    m_timer.disconnect(this, SLOT(showPlayers()));
+
+    foreach(Player* player, m_players)
+        player->visible(true);
 }

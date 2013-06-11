@@ -17,9 +17,12 @@ GameWidget::GameWidget(const QList<UserData> &users, QWidget *parent) :
     ui->board->setScene(scene);
 
     m_game = new Game(users, GAME_INTERVAL, scene);
+    ui->label->setText(QString::number(m_game->toReach()));
     connect(ui->board, SIGNAL(keyDown(QKeyEvent*)), game(), SIGNAL(keyDown(QKeyEvent*)));
     connect(ui->board, SIGNAL(keyUp(QKeyEvent*)), game(), SIGNAL(keyUp(QKeyEvent*)));
     connect(m_game, SIGNAL(updateResult(QString,int)), ui->results, SLOT(result(QString,int)));
+    connect(m_game, SIGNAL(finished()), SIGNAL(exit()));
+    connect(m_game, SIGNAL(updateToReach(int)), SLOT(toReachChanged(int)));
     game()->play();
 }
 
@@ -46,4 +49,9 @@ void GameWidget::on_pushButton_clicked()
         game()->play();
         ui->pushButton->setText(tr("Pause"));
     }
+}
+
+void GameWidget::toReachChanged(int toReach)
+{
+    ui->label->setText(QString::number(toReach));
 }
