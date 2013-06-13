@@ -23,6 +23,9 @@
    <string notr="true">QToolButton[active=&quot;true&quot;] {
   color: red;
   font-weight: bold;
+}
+#root {
+  border: 1px solid white;
 }</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">

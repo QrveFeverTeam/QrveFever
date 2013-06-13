@@ -84,5 +84,5 @@ const QColor UsersWidget::COLORS[MAX_USERS] = {
     QColor(255, 0, 0),
     QColor(0, 255, 0),
     QColor(0, 0, 255),
-    QColor(0, 0, 0)
+    QColor(255, 255, 255)
 };
